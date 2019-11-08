@@ -1,5 +1,6 @@
 import random
 
+
 def main():
       #rolls list will contain the value of all 3 dice rolls, stored as a list that comprises an image of the
       #corresponding roll to be parsed by the printer function
@@ -10,24 +11,29 @@ def main():
       while rollcount < 3:
             #roll variable is established to pull the appropriate image from dice function
             roll = random.randint(1,6)
-            value = dice(roll)
+            value = dice()
             #List append adds the rolled dice as its image to the list of rolls
+            #
             rolls.append(value)
             rollcount = rollcount + 1
       if rollcount == 3:
             #Feed all three rolls in the list to the printer function
-            printer(rolls)
+            #
+            compiler(rolls)
 
-def printer(rolls):
+
+def compiler(x):
       #dicecount is used to track which dice is currently being printed
+      #
       dicecount = 0
       #linecount is used to track the line currently being printed on
+      #
       linecount = 0
       image = 'Your rolls: \n'
       while linecount < 6:
             #Image editing line adds the current line of the current dice tracked by line/dice counter
-            #After adding one line of a dice, it adds one to dicecount, and adds the same line of the next dice
-            image = image + (rolls[dicecount][linecount])
+            #After adding one line of one dice, it adds one to dicecount, and adds the same line of the next dice
+            image = image + (x[dicecount][linecount])
             dicecount = dicecount + 1
             #After all three die of one row are added, a line break is added and linecount gains one, while dicecount
             #is reset, to begin drawing the next line of all three die
@@ -36,28 +42,46 @@ def printer(rolls):
                   dicecount = 0
                   linecount = linecount + 1
                   image = image + '\n'
+      print (image)
+      decision()
 
-      print(image)
+
+def printer(image):
+      print (image)
+
+
+
+def decision():
+      while True:
+            reroll = input('Would you like to reroll any of you dice? [Y/N]')
+            if reroll.lower() != 'y' and reroll.lower() != 'n':
+                  reroll2 = input('Please input [Y] if you would like to reroll, or [N] if you prefer to keep your dice.')
+                  if reroll2.lower() == 'n':
+                        break
+                  if reroll2.lower() == 'y':
+                        break
+                        #placeholder for rerollselect
+
+            if reroll.lower() == 'n':
+                  break
+            if reroll.lower() == 'y':
+                  break
+                  # placeholder for rerollselect
       end()
 
 
-
-
-
 def end():
-      retry = input('Enter to escape.' + '\n' + 'R to reroll.')
+      retry = input('Enter to escape.' + '\n' + 'R to reroll.' + '\n')
       if retry.lower() == 'r':
             main()
       else:
             raise SystemExit
 
 
-
-
-
-
-def dice(roll):
+def dice():
       #Contains art for the die in the format of a list to be parsed by the printer function
+      #
+      roll = random.randint(1,6)
       d1 = ['   ________  ',
             ' /         \ ',
             ' |         | ',
@@ -76,7 +100,6 @@ def dice(roll):
             " |    0    | ",
             " |  0      | ",
             " \_________/ "]
-      global d4
       d4 = ["   ________  ",
             " /         \ ",
             " |  0   0  | ",
