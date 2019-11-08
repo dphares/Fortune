@@ -1,8 +1,13 @@
 import random
+import os
 
 #main accepts 1 or 0 as an argument.
 #1 will cause the function to return it's value, whereas
 #0 will cause the compiler to initialize for the first roll
+def rolestart():
+      main(0)
+
+
 def main(m):
       global rolls
       rolls = []
@@ -44,7 +49,7 @@ def compiler(x, u):
       #If the function was called for the first time, call it with 0 for u in order to initiate the inputmanager
       # and exchange or 1 to trigger the function's return
       if u == 0:
-            print (image)
+            printer(image)
             print ('Would you like to reroll any of your dice?')
             inputone = inputmanager(1)
             if inputone == 0:
@@ -124,6 +129,7 @@ def exchanger():
             originalrolls[replacements[1] -1] = newrolls[1]
       newimage = compiler(originalrolls, 1)
       printer(newimage)
+      end()
 
 
 def comparison():
@@ -131,8 +137,7 @@ def comparison():
 
 
 def printer(i):
-      print (i)
-      end()
+      print ('```' + '\n' + i + '\n' + '```')
 
 
 def end():
@@ -143,42 +148,42 @@ def dice():
       #Contains art for the die in the format of a list to be parsed by the printer function
       #
       roll = random.randint(1,6)
-      d1 = ['   ________  ',
-            ' /         \ ',
-            ' |         | ',
-            ' |    0    | ',
-            ' |         | ',
-            ' \_________/ ']
-      d2 = ["   ________  ",
-            " /         \ ",
-            " |      0  | ",
-            " |         | ",
-            " |  0      | ",
-            " \_________/ "]
-      d3 = ["   ________  ",
-            " /         \ ",
-            " |      0  | ",
-            " |    0    | ",
-            " |  0      | ",
-            " \_________/ "]
-      d4 = ["   ________  ",
-            " /         \ ",
-            " |  0   0  | ",
-            " |         | ",
-            " |  0   0  | ",
-            " \_________/ "]
-      d5 = ["   ________  ",
-            " /         \ ",
-            " |  0   0  | ",
-            " |    0    | ",
-            " |  0   0  | ",
-            " \_________/ "]
-      d6 = ["   ________  ",
-            " /         \ ",
-            " |  0   0  | ",
-            " |  0   0  | ",
-            " |  0   0  | ",
-            " \_________/ "]
+      d1 = ["  _______  ",
+            " /       \ ",
+            " |       | ",
+            " |   0   | ",
+            " |       | ",
+            " \_______/ "]
+      d2 = ["  _______  ",
+            " /       \ ",
+            " |     0 | ",
+            " |       | ",
+            " | 0     | ",
+            " \_______/ "]
+      d3 = ["  _______  ",
+            " /       \ ",
+            " |     0 | ",
+            " |   0   | ",
+            " | 0     | ",
+            " \_______/ "]
+      d4 = ["  _______  ",
+            " /       \ ",
+            " | 0   0 | ",
+            " |       | ",
+            " | 0   0 | ",
+            " \_______/ "]
+      d5 = ["  _______  ",
+            " /       \ ",
+            " | 0   0 | ",
+            " |   0   | ",
+            " | 0   0 | ",
+            " \_______/ "]
+      d6 = ["  _______  ",
+            " /       \ ",
+            " | 0   0 | ",
+            " | 0   0 | ",
+            " | 0   0 | ",
+            " \_______/ "]
 
       if roll == 1:
             return d1
@@ -193,4 +198,11 @@ def dice():
       if roll == 6:
             return d6
 
-main(0)
+
+def envselect():
+      if 'discord_bot_token' in os.environ:
+            output = rolestart()
+            return output
+
+
+envselect()
