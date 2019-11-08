@@ -1,8 +1,13 @@
 import random
+import os
 
 #main accepts 1 or 0 as an argument.
 #1 will cause the function to return it's value, whereas
 #0 will cause the compiler to initialize for the first roll
+def rolestart():
+      main(0)
+
+
 def main(m):
       global rolls
       rolls = []
@@ -193,4 +198,11 @@ def dice():
       if roll == 6:
             return d6
 
-main(0)
+
+def envselect():
+      if 'discord_bot_token' in os.environ:
+            output = rolestart()
+            return output
+
+
+envselect()
