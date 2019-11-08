@@ -1,7 +1,7 @@
 import random
+import os
 
-
-def main():
+def rolestart():
       #rolls list will contain the value of all 3 dice rolls, stored as a list that comprises an image of the
       #corresponding roll to be parsed by the printer function
       rolls = []
@@ -19,7 +19,7 @@ def main():
       if rollcount == 3:
             #Feed all three rolls in the list to the printer function
             #
-            compiler(rolls)
+            return compiler(rolls)
 
 
 def compiler(x):
@@ -42,40 +42,9 @@ def compiler(x):
                   dicecount = 0
                   linecount = linecount + 1
                   image = image + '\n'
-      print (image)
-      decision()
+      return image
 
 
-def printer(image):
-      print (image)
-
-
-
-def decision():
-      while True:
-            reroll = input('Would you like to reroll any of you dice? [Y/N]')
-            if reroll.lower() != 'y' and reroll.lower() != 'n':
-                  reroll2 = input('Please input [Y] if you would like to reroll, or [N] if you prefer to keep your dice.')
-                  if reroll2.lower() == 'n':
-                        break
-                  if reroll2.lower() == 'y':
-                        break
-                        #placeholder for rerollselect
-
-            if reroll.lower() == 'n':
-                  break
-            if reroll.lower() == 'y':
-                  break
-                  # placeholder for rerollselect
-      end()
-
-
-def end():
-      retry = input('Enter to escape.' + '\n' + 'R to reroll.' + '\n')
-      if retry.lower() == 'r':
-            main()
-      else:
-            raise SystemExit
 
 
 def dice():
@@ -132,4 +101,11 @@ def dice():
       if roll == 6:
             return d6
 
-main()
+
+def envselect():     
+      if 'discord_bot_token' in os.environ:
+            output = rolestart()
+            return output
+
+
+envselect()
